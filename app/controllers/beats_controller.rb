@@ -1,10 +1,10 @@
-class BeatsController < ApplicationController
+class BeatsController < OpenReadController
   before_action :set_beat, only: [:show, :update, :destroy]
 
   # GET /beats
   # GET /beats.json
   def index
-    @beats = Beat.all
+    @beats = current_user.beats
 
     render json: @beats
   end
@@ -12,13 +12,15 @@ class BeatsController < ApplicationController
   # GET /beats/1
   # GET /beats/1.json
   def show
-    render json: @beat
+    @beats = current_users.beats.find(params[:id])
+    render json: Beat.find(params[:id])
+    # render json: @beat
   end
 
   # POST /beats
   # POST /beats.json
   def create
-    @beat = Beat.new(beat_params)
+    @beat = current_user.beats.build(beat_params)
 
     if @beat.save
       render json: @beat, status: :created, location: @beat
@@ -30,7 +32,8 @@ class BeatsController < ApplicationController
   # PATCH/PUT /beats/1
   # PATCH/PUT /beats/1.json
   def update
-    @beat = Beat.find(params[:id])
+    @beat = current_user.beats.find(params[:id])
+    # @beat = Beat.find(params[:id])
 
     if @beat.update(beat_params)
       head :no_content
