@@ -5,6 +5,7 @@ class BeatsController < OpenReadController
   # GET /beats.json
   def index
     @beats = current_user.beats
+    # @beats = Beat.all
 
     render json: @beats
   end
@@ -12,9 +13,9 @@ class BeatsController < OpenReadController
   # GET /beats/1
   # GET /beats/1.json
   def show
-    @beats = current_users.beats.find(params[:id])
+    @beats = current_user.beats.find(params[:id])
     render json: Beat.find(params[:id])
-    # render json: @beat
+    # render json: @beats
   end
 
   # POST /beats
@@ -53,7 +54,8 @@ class BeatsController < OpenReadController
   private
 
     def set_beat
-      @beat = Beat.find(params[:id])
+      # @beat = Beat.find(params[:id])
+      @beat = current_user.beats.find(params[:id])
     end
 
     def beat_params
