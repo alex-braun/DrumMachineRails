@@ -1,5 +1,5 @@
 #
-class UsersController < ProtectedController
+class UsersController < OpenReadController
   skip_before_action :authenticate, only: [:signup, :signin]
 
   # POST '/sign-up'
@@ -42,6 +42,11 @@ class UsersController < ProtectedController
     else
       head :no_content
     end
+  end
+
+  def beats
+    @user = User.find(params[:id])
+    @beats = @user.beats
   end
 
   def index
