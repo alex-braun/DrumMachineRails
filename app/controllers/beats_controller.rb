@@ -5,7 +5,6 @@ class BeatsController < OpenReadController
   # GET /beats.json
   def index
     @beats = current_user.beats
-    # @beats = Beat.all
 
     render json: @beats
   end
@@ -15,7 +14,6 @@ class BeatsController < OpenReadController
   def show
     @beats = current_user.beats.find(params[:id])
     render json: Beat.find(params[:id])
-    # render json: @beats
   end
 
   # POST /beats
@@ -34,7 +32,6 @@ class BeatsController < OpenReadController
   # PATCH/PUT /beats/1.json
   def update
     @beat = current_user.beats.find(params[:id])
-    # @beat = Beat.find(params[:id])
 
     if @beat.update(beat_params)
       head :no_content
@@ -53,12 +50,11 @@ class BeatsController < OpenReadController
 
   private
 
-    def set_beat
-      # @beat = Beat.find(params[:id])
-      @beat = current_user.beats.find(params[:id])
-    end
+  def set_beat
+    @beat = current_user.beats.find(params[:id])
+  end
 
-    def beat_params
-      params.require(:beat).permit(:name, :kick, :snare, :hatClose, :hatOpen, :clap, :user_id)
-    end
+  def beat_params
+    params.require(:beat).permit(:name, :kick, :snare, :hatClose, :hatOpen, :clap, :user_id)
+  end
 end
