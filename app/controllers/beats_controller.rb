@@ -1,4 +1,4 @@
-class BeatsController < OpenReadController
+class BeatsController < ProtectedController
   before_action :set_beat, only: [:show, :update, :destroy]
 
   # GET /beats
