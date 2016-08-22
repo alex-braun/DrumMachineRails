@@ -41,7 +41,7 @@ module DrumMachineApi
     # Cross-Origin Resource Sharing
     config.middleware.use Rack::Cors do
       allow do
-        origins ENV['CLIENT_URL'] || 'http://localhost:8080'
+        origins ENV['CLIENT_URL'] || 'https://drum-sequencer.herokuapp.com'
         resource '*',
                  headers: :any,
                  methods: [:options, :get,
